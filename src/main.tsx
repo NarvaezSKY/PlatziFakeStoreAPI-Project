@@ -6,7 +6,7 @@ import Navbar from './app/products/components/navbar.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Navbar/>
+    <Navbar />
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
 )
