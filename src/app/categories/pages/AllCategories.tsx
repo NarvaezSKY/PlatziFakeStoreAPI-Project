@@ -46,7 +46,7 @@ const CategoryList = () => {
 
     fetchCategories()
   }, [setCategories])
-  const { isOpen, openModal, closeModal } = useModal() // Corrección: Agrega closeModal aquí
+  const { isOpen, openModal, closeModal } = useModal()
 
   return (
     <div className='container mx-auto py-8'>

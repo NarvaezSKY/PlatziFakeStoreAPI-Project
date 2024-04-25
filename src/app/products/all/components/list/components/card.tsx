@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Product } from '../../../../../../../core/products/domain/product.interface'
+import { IGetAllProductsRes } from '../../../../../../core/new-products/domain/get-all-products'
 
-export const ProductCard = ({ product }: { product: Product }) => (
+export const ProductCard = ({ product }: { product: IGetAllProductsRes }) => (
   <div className='w-70 h-80 bg-gray-50 p-3 flex flex-col gap-1 rounded-md'>
     <div className='h-48 bg-gray-200 rounded-md'>
       <img

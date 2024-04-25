@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react'
 import './styles/uploadForm.css'
 import { useForm } from 'react-hook-form'
-import { ProductsRepository } from '../../../../../core/products/infraestructure/products.repository'
-import { IGetAllProductsRes } from '../../../../../core/new-products/domain/get-all-products/get-all-products.res'
+// import { ProductsRepository } from '../../../../../core/products/infraestructure/products.repository'
+import { useProductStore } from '../../../store/use.products.store'
+import { IUpdateProductReq } from '../../../../../core/new-products/domain/update-products'
 
 interface UploadFormProps {
   isOpen: boolean
   closeModal: () => void
-  productToEdit?: IGetAllProductsRes
+  productToEdit?: IUpdateProductReq
   mode: 'add' | 'edit'
 }
 
@@ -23,27 +24,30 @@ const UploadForm: React.FC<UploadFormProps> = ({
       setValue('title', productToEdit.title)
       setValue('price', productToEdit.price)
       setValue('description', productToEdit.description)
-      setValue('categoryId', productToEdit.category.id)
+      setValue('categoryId', productToEdit.categoryId)
 
       setValue('images', productToEdit.images.join(','))
     }
   }, [mode, productToEdit, setValue])
 
+  const { createProduct, updateProduct } = useProductStore()
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
-    const productsRepository = new ProductsRepository()
+    // const productsRepository = new ProductsRepository()
     try {
       const images = Array.isArray(data.images) ? data.images : [data.images]
       const productData = { ...data, images }
       if (mode === 'edit' && productToEdit) {
         console.log('editing product', productToEdit)
-        await productsRepository.updateProduct(productToEdit.id, productData)
+        updateProduct(productToEdit.id, productData)
       } else {
-        await productsRepository.createProduct(productData)
+        createProduct(productData)
         console.log('Product created:', productData)
+        
       }
       closeModal()
-      window.location.reload()
+      // window.location.reload()
     } catch (error) {
       console.error('Error creating product:', error)
     }

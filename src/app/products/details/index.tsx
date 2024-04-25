@@ -1,52 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { Product } from '../../../core/products/domain/product.interface'
-import { ProductsRepository } from '../../../core/products/infraestructure/products.repository'
+import React, { useState } from 'react'
+// import { Product } from '../../../core/products/domain/product.interface'
 import useModal from '../all/components/add/hooks/useModal'
 import UploadForm from '../all/components/add/add'
+import useProductDetails from './hooks/use-product-selected'
 
 const ProductDetails: React.FC = () => {
   const { isOpen, openModal, closeModal } = useModal()
-  const { id } = useParams<{ id: string }>()
-  const [product, setProduct] = useState<Product | null>(null)
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0)
-  const navigate = useNavigate()
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        if (id) {
-          const productsRepository = new ProductsRepository()
-          const fetchedProduct = await productsRepository.getProductById(
-            parseInt(id)
-          )
-          setProduct(fetchedProduct)
-        }
-      } catch (error) {
-        console.error('Error fetching product:', error)
-      }
-    }
-
-    fetchProduct()
-  }, [id])
+  const { product, handleDeleteProduct } = useProductDetails()
 
   const handleImageClick = (index: number) => {
     setSelectedImageIndex(index)
   }
 
-  const handleDeleteProduct = async () => {
-    try {
-      if (id) {
-        const productsRepository = new ProductsRepository()
-        await productsRepository.deleteProduct(parseInt(id))
-        setProduct(null)
-        alert(`product ${id} deleted succesfully`)
-        navigate('/')
-      }
-    } catch (error) {
-      console.error('Error deleting product:', error)
-    }
-  }
   const handleEditProduct = () => {
     openModal()
   }
@@ -62,6 +29,7 @@ const ProductDetails: React.FC = () => {
       </div>
     )
   }
+
 
   return (
     <div className='flex flex-col lg:flex-row lg:items-center'>
