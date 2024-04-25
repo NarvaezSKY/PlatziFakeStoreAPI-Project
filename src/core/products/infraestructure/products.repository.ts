@@ -3,12 +3,7 @@ import { Product } from '../domain/product.interface'
 
 const API_URL = 'https://api.escuelajs.co/api/v1'
 
-
-
 export class ProductsRepository {
-
-
-
   async getAllProducts(categoryId?: number): Promise<Product[]> {
     try {
       let url = `${API_URL}/products`
@@ -17,9 +12,6 @@ export class ProductsRepository {
         url += `?categoryId=${categoryId}`
       }
       const response = await axios.get<Product[]>(url)
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      // const setProducts = useSetProducts()
-      // setProducts(response.data)
       return response.data
     } catch (error) {
       console.error('Error fetching products:', error)

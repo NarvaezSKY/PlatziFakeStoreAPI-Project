@@ -4,7 +4,7 @@ export const ProductsFilterForm = () => {
   const { methods } = useProductsFilterForm()
 
   return (
-    <form className='grid grid-cols-3 gap-2'>
+    <form className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 p-4  shadow-md'>
       <input
         {...methods.register('title')}
         placeholder='Title'

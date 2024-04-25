@@ -1,10 +1,9 @@
-import { Add, Filters, List } from './components'
+import { List, ProductsFilterForm } from './components'
 
 const AllProductsPage = () => {
   return (
     <div>
-      <Add />
-      <Filters />
+      <ProductsFilterForm />
       <List />
     </div>
   )

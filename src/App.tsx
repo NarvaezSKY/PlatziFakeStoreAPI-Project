@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ProductsPage from './app/products/pages/AllProducts'
-import ProductDetails from './app/products/pages/ProductDetails' // Importa el componente ProductDetails
+// import ProductsPage from './app/products/pages/AllProducts'
+import ProductDetails from './app/products/details/index' // Importa el componente ProductDetails
 import CategoryList from './app/categories/pages/AllCategories'
 import CategoryProductsPage from './app/categories/pages/ProductsByCategory'
+import AllProductsPage from './app/products/all'
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<ProductsPage />}
+          element={<AllProductsPage />}
         />
         <Route
           path='/products/:id'

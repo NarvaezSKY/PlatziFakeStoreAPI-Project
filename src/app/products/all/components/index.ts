@@ -1,3 +1,3 @@
 export * from './add/add'
-export * from './filters/filters'
+export * from './filters/products-filter-form'
 export * from './list/list'

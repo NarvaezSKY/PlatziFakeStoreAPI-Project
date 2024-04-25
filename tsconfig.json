@@ -20,6 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "rip/AllProducts.tsx", "rip/uploadForm.tsx", "rip/ProductDetails.tsx", "rip/useModal.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

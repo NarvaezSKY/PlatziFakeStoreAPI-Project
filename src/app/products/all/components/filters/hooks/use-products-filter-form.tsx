@@ -3,8 +3,8 @@ import { IFormValues, filterSchema } from '../models'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { IGetAllProductsReq } from '../../../../../core/new-products/domain/get-all-products'
-import { useProductStore } from '../../../store/use.products.store'
+import { IGetAllProductsReq } from '../../../../../../core/new-products/domain/get-all-products'
+import { useProductStore } from '../../../../store/use.products.store'
 
 export const useProductsFilterForm = () => {
   const [searchParams, setSearchParams] = useSearchParams()
