@@ -6,10 +6,10 @@ export interface IUpdateProductRes {
   images: string[]
   creationAt: string
   updatedAt: string
-  category: Category
+  category: CategoryRes
 }
 
-interface Category {
+interface CategoryRes {
   id: number
   name: string
   image: string

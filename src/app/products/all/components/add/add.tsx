@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useState } from 'react'
 import './styles/uploadForm.css'
 import { useForm } from 'react-hook-form'
-// import { ProductsRepository } from '../../../../../core/products/infraestructure/products.repository'
 import { useProductStore } from '../../../store/use.products.store'
 import { IUpdateProductReq } from '../../../../../core/new-products/domain/update-products'
+import { useCategoryStore } from '../../../../categories/store/use.category.store'
 
 interface UploadFormProps {
   isOpen: boolean
@@ -19,30 +20,41 @@ const UploadForm: React.FC<UploadFormProps> = ({
   mode
 }) => {
   const { register, handleSubmit, reset, setValue } = useForm()
+  const { categories, loading, getAllCategories } = useCategoryStore()
+  const [selectedCategory, setSelectedCategory] = useState<number | undefined>(
+    undefined
+  )
+
+  useEffect(() => {
+    getAllCategories()
+  }, [getAllCategories])
+
   useEffect(() => {
     if (mode === 'edit' && productToEdit) {
       setValue('title', productToEdit.title)
       setValue('price', productToEdit.price)
       setValue('description', productToEdit.description)
-      setValue('categoryId', productToEdit.categoryId)
-
+      setValue('category.id', productToEdit.category.id)
       setValue('images', productToEdit.images.join(','))
+      setValue('category.id', productToEdit.category.id)
     }
   }, [mode, productToEdit, setValue])
 
   const { createProduct, updateProduct } = useProductStore()
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
     try {
       const images = Array.isArray(data.images) ? data.images : [data.images]
-      const productData = { ...data, images }
+      const productData = {
+        ...data,
+        images,
+        categoryId: selectedCategory // Utiliza selectedCategory aquí
+      }
+      console.log(productData.category)
       if (mode === 'edit' && productToEdit) {
-        console.log('editing product', productToEdit)
         updateProduct(productToEdit.id, productData)
       } else {
         createProduct(productData)
-        console.log('Product created:', productData)
       }
       closeModal()
     } catch (error) {
@@ -96,12 +108,25 @@ const UploadForm: React.FC<UploadFormProps> = ({
                 {...register('description')}
               ></textarea>
               <label htmlFor='Date'>Select a Category</label>
-              <input
+              <select
                 className='capitalize shadow-2xl p-3 ex w-full outline-none focus:border-solid focus:border-[1px] border-[#035ec5] placeholder:text-gray'
-                type='number'
-                placeholder='Category'
-                {...register('categoryId')}
-              />
+                value={selectedCategory || ''}
+                onChange={(e) => setSelectedCategory(Number(e.target.value))}
+              >
+                <option value=''>Select Category</option>
+                {loading ? (
+                  <option disabled>Loading...</option>
+                ) : (
+                  categories.map((category) => (
+                    <option
+                      key={category.id}
+                      value={category.id}
+                    >
+                      {category.name}
+                    </option>
+                  ))
+                )}
+              </select>
               <label htmlFor='Date'>Upload your images</label>
               <input
                 className='capitalize shadow-2xl p-3 ex w-full outline-none focus:border-solid focus:border-[1px] border-[#035ec5] placeholder:text-gray'
@@ -110,7 +135,6 @@ const UploadForm: React.FC<UploadFormProps> = ({
                 {...register('images')}
               />
             </div>
-
             <button className='outline-none glass shadow-2xl  w-full p-3  bg-[#ffffff42] hover:border-[#035ec5] hover:border-solid hover:border-[1px]  hover:text-[#035ec5] font-bold'>
               Submit
             </button>

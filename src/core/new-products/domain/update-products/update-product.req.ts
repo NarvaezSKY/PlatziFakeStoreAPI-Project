@@ -3,6 +3,10 @@ export interface IUpdateProductReq {
   title: string
   price: number
   description: string
-  categoryId: number
+  category: CategoryReq
   images: string[]
+}
+
+interface CategoryReq {
+  id: number
 }

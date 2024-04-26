@@ -42,7 +42,7 @@ const createProduct: IProductsRepository['createProduct'] = async (
     window.location.reload()
     return res.data
   } catch (error) {
-    throw new Error('Error creating product')
+    console.log(error)
   }
 }
 
@@ -62,7 +62,10 @@ const updateProduct: IProductsRepository['updateProduct'] = async (
   try {
     const res = await axios.put(`${API_URL}/products/${id}`, productData)
     window.location.reload()
+    console.log(productData.category, 'PRODUCT DATA FROM REPOSITORY')
+    console.log(res.data.category, 'RES DATA FROM REPOSITORY')
     return res.data
+    
   } catch (error) {
     throw new Error('Error updating product')
   }

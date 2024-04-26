@@ -43,6 +43,7 @@ export const useProductStore = create<Store>((set) => ({
   },
 
   updateProduct: async (id, productData) => {
+    console.log(productData)
     const data = await updateProductUseCase(productsRepository)(id, productData)
     console.log(data)
   },
@@ -54,6 +55,5 @@ export const useProductStore = create<Store>((set) => ({
   getSingleProduct: async (id) => {
     const data = await getSingleProductUseCase(productsRepository)(id)
     return data
-    console.log(data)
   }
 }))
