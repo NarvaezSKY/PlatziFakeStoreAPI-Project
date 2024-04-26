@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useModal from '../all/components/add/hooks/useModal';
 import UploadForm from '../all/components/add/add';
 import useProductDetails from './hooks/use-product-selected';
-import { IGetSingleProductResponse } from '../../../../core/new-products/domain/get-product-by-id';
 
 const ProductDetails: React.FC = () => {
   const { isOpen, openModal, closeModal } = useModal();
@@ -30,9 +29,9 @@ const ProductDetails: React.FC = () => {
   }
 
   // Ajuste de la estructura de la categoría
-  const updatedProduct: IGetSingleProductResponse = {
+  const updatedProduct = {
     ...product,
-    category: { id: product.category.id },
+    category: { id: product.category.id, name: product.category.name, image: product.category.image },
   };
 
   return (
@@ -42,7 +41,7 @@ const ProductDetails: React.FC = () => {
           src={product.images[selectedImageIndex]}
           onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
             e.currentTarget.src =
-              'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'; // Imagen alternativa en caso de error
+              'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg';
           }}
           className='w- mb-4 lg:mb-0 rounded-lg'
         />
@@ -53,7 +52,7 @@ const ProductDetails: React.FC = () => {
               src={image}
               onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                 e.currentTarget.src =
-                  'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'; // Imagen alternativa en caso de error
+                  'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg';
               }}
               className={`w-16 h-16 cursor-pointer border ${
                 selectedImageIndex === index
