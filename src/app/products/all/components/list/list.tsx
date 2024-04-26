@@ -31,17 +31,13 @@ export const List = () => {
       offset = 1
     }
 
-    // Recuperar los parámetros de búsqueda actuales
     const params = new URLSearchParams(searchParams)
 
-    // Actualizar solo el parámetro de desplazamiento y límite
     params.set('offset', offset.toString())
     params.set('limit', limit.toString())
 
-    // Aplicar los parámetros actualizados
     setSearchParams(params.toString())
 
-    // Llamar a getAllProducts con los nuevos parámetros de paginación
     getAllProducts({ offset, limit })
   }
 
