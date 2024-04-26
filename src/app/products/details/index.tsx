@@ -36,7 +36,7 @@ const ProductDetails: React.FC = () => {
         <img
           src={product.images[selectedImageIndex]}
           onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-            e.currentTarget.src = 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'; // Establece la imagen alternativa en caso de error
+            e.currentTarget.src = 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg';
           }}
           className='w- mb-4 lg:mb-0 rounded-lg'
         />
@@ -46,7 +46,7 @@ const ProductDetails: React.FC = () => {
               key={index}
               src={image}
               onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                e.currentTarget.src = 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'; // Establece la imagen alternativa en caso de error
+                e.currentTarget.src = 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg';
               }}
               className={`w-16 h-16 cursor-pointer border ${
                 selectedImageIndex === index

@@ -27,11 +27,14 @@ export const useProductsFilterForm = () => {
     const params = new URLSearchParams()
 
     categoryId && params.append('categoryId', categoryId)
-    limit && params.append('limit', limit)
     offset && params.append('offset', offset)
+    limit && params.append('limit', limit)
+    title && params.append('title', title)
+    
+    
     price_max && params.append('price_max', price_max)
     price_min && params.append('price_min', price_min)
-    title && params.append('title', title)
+    
 
     setSearchParams(params.toString())
   }

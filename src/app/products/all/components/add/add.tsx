@@ -34,7 +34,6 @@ const UploadForm: React.FC<UploadFormProps> = ({
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = async (data: any) => {
-    // const productsRepository = new ProductsRepository()
     try {
       const images = Array.isArray(data.images) ? data.images : [data.images]
       const productData = { ...data, images }
@@ -46,7 +45,6 @@ const UploadForm: React.FC<UploadFormProps> = ({
         console.log('Product created:', productData)
       }
       closeModal()
-      // window.location.reload()
     } catch (error) {
       console.error('Error creating product:', error)
     }

@@ -1,29 +1,50 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// import { ProductsFilterForm } from '../filters/products-filter-form'
 import useModal from '../add/hooks/useModal'
 import { useProductStore } from '../../../store/use.products.store'
 import { ProductCard } from './components'
 import UploadForm from '../add/add'
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 export const List = () => {
   const { openModal, isOpen, closeModal } = useModal()
   const { products, loading, getAllProducts } = useProductStore()
   const [currentPage, setCurrentPage] = useState(1)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams)
+    const currentPageParam = params.get('offset')
+
+    if (currentPageParam && !isNaN(parseInt(currentPageParam))) {
+      setCurrentPage(Math.floor(parseInt(currentPageParam) / 10) + 1)
+    } else {
+      setCurrentPage(1)
+    }
+  }, [])
 
   const loadProducts = async () => {
-    const offset = (currentPage - 1) * 10
-    getAllProducts({ offset, limit: 10 })
+    let offset = (currentPage - 1) * 10
+    const limit = 10
+    if (currentPage === 0) {
+      offset = 1
+    }
+    const newParams = new URLSearchParams()
+    newParams.set('offset', offset.toString())
+    newParams.set('limit', limit.toString())
+    setSearchParams(newParams.toString())
+
+    getAllProducts({ offset, limit })
   }
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1)
+      setCurrentPage(currentPage - 1)
     }
   }
 
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1)
+    setCurrentPage(currentPage + 1)
   }
 
   useEffect(() => {
