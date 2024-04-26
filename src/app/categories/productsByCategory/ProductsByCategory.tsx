@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Product } from '../../../core/products/domain/product.interface'
-import { ProductsRepository } from '../../../core/products/infraestructure/products.repository'
+import { useCategoryStore } from '../store/use.category.store'
+import { IGetProductsByCategoryRes } from '../../../core/new-categories/domain/get-products-by-category/get-products-by-category.res'
 
 const CategoryProductsPage: React.FC = () => {
   const { id: categoryId } = useParams<{ id: string }>()
-  const [categoryProducts, setCategoryProducts] = useState<Product[]>([])
+  const [categoryProducts, setCategoryProducts] = useState<
+    IGetProductsByCategoryRes[] | null
+  >(null)
+  const { getProductByCategory } = useCategoryStore()
 
   useEffect(() => {
     const fetchCategoryProducts = async () => {
       try {
         if (categoryId) {
           const categoryIdNumber = parseInt(categoryId)
-          const productsRepository = new ProductsRepository()
-          const allProducts =
-            await productsRepository.getAllProducts(categoryIdNumber)
+
+          const allProducts = await getProductByCategory(categoryIdNumber)
+          console.log(allProducts)
           setCategoryProducts(allProducts)
         }
       } catch (error) {
@@ -23,12 +26,12 @@ const CategoryProductsPage: React.FC = () => {
     }
 
     fetchCategoryProducts()
-  }, [categoryId])
+  })
 
   return (
     <div className='container mx-auto py-8'>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center'>
-        {categoryProducts.map((product) => (
+        {categoryProducts && categoryProducts.map((product) => (
           <div
             key={product.id}
             className='w-70 h-80 bg-gray-50 p-3 flex flex-col gap-1 rounded-md'

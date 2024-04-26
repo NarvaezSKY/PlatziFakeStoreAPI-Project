@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { Product } from '../../../core/products/domain/product.interface'
 import useModal from '../all/components/add/hooks/useModal'
 import UploadForm from '../all/components/add/add'
 import useProductDetails from './hooks/use-product-selected'

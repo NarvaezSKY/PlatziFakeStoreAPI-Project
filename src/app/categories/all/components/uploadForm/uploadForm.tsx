@@ -1,7 +1,8 @@
 import React from 'react'
 import './uploadForm.css'
 import { useForm } from 'react-hook-form'
-import { CategoryRepository } from '../../../core/categories/infraestructure/categories.repository'
+import { useCategoryStore } from '../../../store/use.category.store'
+import { IUploadCategoryReq } from '../../../../../core/new-categories/domain/upload-category'
 
 interface UploadFormProps {
   isOpen: boolean
@@ -10,19 +11,17 @@ interface UploadFormProps {
 
 const UploadForm: React.FC<UploadFormProps> = ({ isOpen, closeModal }) => {
   const { register, handleSubmit, reset } = useForm()
-
+  const { uploadCategory } = useCategoryStore()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onSubmit = async (data: any) => {
-    const categoryRepository = new CategoryRepository()
+  const OnSubmit = async (data: any) => {
     try {
       const images = Array.isArray(data.images) ? data.images : [data.images]
-      const productData = { ...data, images }
+      const productData: IUploadCategoryReq = { ...data, images }
 
-      await categoryRepository.uploadCategory(productData)
+      uploadCategory(productData)
       console.log('Product created:', productData)
 
       closeModal()
-      window.location.reload()
     } catch (error) {
       console.error('Error creating product:', error)
     }
@@ -39,7 +38,7 @@ const UploadForm: React.FC<UploadFormProps> = ({ isOpen, closeModal }) => {
       <div className='modal-content'>
         <form
           className='px-7 grid justify-center items-center'
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(OnSubmit)}
         >
           <b>
             <h2 className='mb-8'>Upload a Category</h2>

@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // import ProductsPage from './app/products/pages/AllProducts'
 import ProductDetails from './app/products/details/index' // Importa el componente ProductDetails
-import CategoryList from './app/categories/pages/AllCategories'
-import CategoryProductsPage from './app/categories/pages/ProductsByCategory'
+import AllCategoriesPage from './app/categories/all'
+import CategoryProductsPage from './app/categories/productsByCategory/ProductsByCategory'
 import AllProductsPage from './app/products/all'
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         />
         <Route
           path='/categories'
-          element={<CategoryList />}
+          element={<AllCategoriesPage />}
         />
         <Route
           path='/categories/:id'
