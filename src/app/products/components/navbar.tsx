@@ -54,8 +54,8 @@ const Navbar: React.FC = () => {
             <li>
               <a
                 href='/'
-                className='block py-2 px-3 text-white bg-blue-700 rounded '
-                aria-current='page'
+                className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
+                
               >
                 All our products
               </a>
@@ -68,14 +68,14 @@ const Navbar: React.FC = () => {
                 Search categories
               </a>
             </li>
-            <li>
+            {/* <li>
               <a
                 href='#'
                 className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white'
               >
                 Search an specific product
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

@@ -9,13 +9,17 @@ const CategoryProductsPage: React.FC = () => {
     IGetProductsByCategoryRes[] | null
   >(null)
   const { getProductByCategory } = useCategoryStore()
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageError = () => {
+    setImageError(true)
+  }
 
   useEffect(() => {
     const fetchCategoryProducts = async () => {
       try {
         if (categoryId) {
           const categoryIdNumber = parseInt(categoryId)
-
           const allProducts = await getProductByCategory(categoryIdNumber)
           console.log(allProducts)
           setCategoryProducts(allProducts)
@@ -26,7 +30,7 @@ const CategoryProductsPage: React.FC = () => {
     }
 
     fetchCategoryProducts()
-  })
+  }, [categoryId])
 
   return (
     <div className='container mx-auto py-8'>
@@ -40,8 +44,13 @@ const CategoryProductsPage: React.FC = () => {
               <div className='h-48 bg-gray-200 rounded-md'>
                 <img
                   className='h-full w-full object-cover rounded-xl'
-                  src={product.images[0]}
+                  src={
+                    imageError
+                      ? 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'
+                      : product.images[0]
+                  }
                   alt={product.title}
+                  onError={handleImageError}
                 />
               </div>
               <div className='flex flex-col gap-2'>
@@ -52,7 +61,6 @@ const CategoryProductsPage: React.FC = () => {
                       : product.title}
                   </span>
                 </div>
-
                 <p className='font-bold text-red-600'>${product.price}</p>
                 <Link to={`/products/${product.id}`}>
                   <button className='hover:bg-primary text-gray-50 bg-secondary py-2 rounded-md'>
