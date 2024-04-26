@@ -1,4 +1,4 @@
-import CategoryList from "./components/list/list"
+import { CategoryList } from './components'
 
 const AllCategoriesPage = () => {
   return (

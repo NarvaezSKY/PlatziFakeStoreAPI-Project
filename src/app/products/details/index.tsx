@@ -29,7 +29,6 @@ const ProductDetails: React.FC = () => {
     )
   }
 
-
   return (
     <div className='flex flex-col lg:flex-row lg:items-center'>
       <div className='lg:w-1/2 lg:pr-8'>

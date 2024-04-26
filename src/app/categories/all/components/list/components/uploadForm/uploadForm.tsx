@@ -1,8 +1,8 @@
 import React from 'react'
 import './uploadForm.css'
 import { useForm } from 'react-hook-form'
-import { useCategoryStore } from '../../../store/use.category.store'
-import { IUploadCategoryReq } from '../../../../../core/new-categories/domain/upload-category'
+import { useCategoryStore } from '../../../../../store/use.category.store'
+import { IUploadCategoryReq } from '../../../../../../../core/new-categories/domain/upload-category'
 
 interface UploadFormProps {
   isOpen: boolean

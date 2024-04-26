@@ -7,7 +7,7 @@ const getAllCategories: ICategoriesRepository['getAllCategories'] =
   async () => {
     try {
       const res = await axios.get(`${API_URL}/categories`)
-      
+
       return res.data
     } catch (error) {
       throw new Error('Error fetching categories')

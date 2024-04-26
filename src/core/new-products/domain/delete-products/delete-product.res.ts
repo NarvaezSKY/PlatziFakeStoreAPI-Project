@@ -1,3 +1,3 @@
 export interface IDeleteProductRes {
-    status: boolean
+  status: boolean
 }

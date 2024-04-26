@@ -38,7 +38,7 @@ export const useProductsFilterForm = () => {
 
   useEffect(() => {
     onChange()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, limit, offset, price_max, price_min, title])
 
   const { getAllProducts } = useProductStore()
@@ -65,7 +65,7 @@ export const useProductsFilterForm = () => {
     }
 
     getAllProducts(body)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams])
 
   return {

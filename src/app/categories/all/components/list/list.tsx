@@ -1,10 +1,10 @@
-import useModal from '../../hooks/useModal'
-import UploadForm from '../uploadForm/uploadForm'
+import useModal from './hooks/useModal'
+import UploadForm from './components/uploadForm/uploadForm'
 import { CategoryCard } from './components'
 import { useCategoryStore } from '../../../store/use.category.store'
 import { useEffect } from 'react'
 
-const CategoryList = () => {
+export const CategoryList = () => {
   const { categories, getAllCategories } = useCategoryStore()
   useEffect(() => {
     getAllCategories()
@@ -23,7 +23,6 @@ const CategoryList = () => {
               category={category}
             />
           ))}
-         
         </div>
         <UploadForm
           isOpen={isOpen}
@@ -31,13 +30,11 @@ const CategoryList = () => {
         />
       </div>
       <button
-            className=' hover:bg-primary text-gray-50 bg-secondary rounded-md w-full sm:w-auto mt-10'
-            onClick={openModal}
-          >
-            Add Category
-          </button>
+        className=' hover:bg-primary text-gray-50 bg-secondary rounded-md w-full sm:w-auto mt-10'
+        onClick={openModal}
+      >
+        Add Category
+      </button>
     </div>
   )
 }
-
-export default CategoryList

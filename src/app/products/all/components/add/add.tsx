@@ -44,7 +44,6 @@ const UploadForm: React.FC<UploadFormProps> = ({
       } else {
         createProduct(productData)
         console.log('Product created:', productData)
-        
       }
       closeModal()
       // window.location.reload()

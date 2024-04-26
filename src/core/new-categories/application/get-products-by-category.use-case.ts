@@ -1,4 +1,5 @@
-import { ICategoriesRepository } from "../domain/categories.repository";
+import { ICategoriesRepository } from '../domain/categories.repository'
 
-export const getProductByCategoryUseCase = (repository: ICategoriesRepository) =>
-    repository.getProductsByCategory
+export const getProductByCategoryUseCase = (
+  repository: ICategoriesRepository
+) => repository.getProductsByCategory
