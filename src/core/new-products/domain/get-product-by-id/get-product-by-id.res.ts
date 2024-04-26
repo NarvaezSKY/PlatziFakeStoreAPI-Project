@@ -7,10 +7,10 @@ export interface IGetSingleProductResponse {
   creationAt: string
   updatedAt: string
   category: Category
+  categoryId: number
 }
 
 interface Category {
-  id: number
   name: string
   image: string
   creationAt: string
