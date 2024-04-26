@@ -30,11 +30,9 @@ export const useProductsFilterForm = () => {
     offset && params.append('offset', offset)
     limit && params.append('limit', limit)
     title && params.append('title', title)
-    
-    
+
     price_max && params.append('price_max', price_max)
     price_min && params.append('price_min', price_min)
-    
 
     setSearchParams(params.toString())
   }

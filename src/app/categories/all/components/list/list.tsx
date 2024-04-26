@@ -5,12 +5,12 @@ import { useCategoryStore } from '../../../store/use.category.store'
 import { useEffect } from 'react'
 
 export const CategoryList = () => {
-  const { categories, getAllCategories } = useCategoryStore();
+  const { categories, getAllCategories } = useCategoryStore()
   useEffect(() => {
-    getAllCategories();
-  });
+    getAllCategories()
+  })
 
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal } = useModal()
 
   return (
     <div className='container mx-auto py-8'>
@@ -24,11 +24,17 @@ export const CategoryList = () => {
       <div className='flex flex-col items-center bg-white shadow-lg rounded-md'>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center mt-10 mb-10'>
           {categories.map((category) => (
-            <CategoryCard key={category.id} category={category} />
+            <CategoryCard
+              key={category.id}
+              category={category}
+            />
           ))}
         </div>
-        <UploadForm isOpen={isOpen} closeModal={closeModal} />
+        <UploadForm
+          isOpen={isOpen}
+          closeModal={closeModal}
+        />
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,20 +1,24 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { IGetAllProductsRes } from '../../../../../../core/new-products/domain/get-all-products';
+import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { IGetAllProductsRes } from '../../../../../../core/new-products/domain/get-all-products'
 
 export const ProductCard = ({ product }: { product: IGetAllProductsRes }) => {
-  const [imageError, setImageError] = useState(false);
+  const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {
-    setImageError(true);
-  };
+    setImageError(true)
+  }
 
   return (
     <div className='w-70 h-80 bg-gray-200 p-2 m-2 flex flex-col shadow-md rounded-md'>
       <div className='h-48 bg-gray-300 rounded-md'>
         <img
           className='h-full w-full  object-cover rounded-xl'
-          src={imageError ? 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg' : product.images[0]}
+          src={
+            imageError
+              ? 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'
+              : product.images[0]
+          }
           alt={product.title}
           onError={handleImageError}
         />
@@ -36,5 +40,5 @@ export const ProductCard = ({ product }: { product: IGetAllProductsRes }) => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}

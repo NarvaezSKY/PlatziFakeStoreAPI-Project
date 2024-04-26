@@ -7,7 +7,7 @@ export const ProductsFilterForm = () => {
   const { methods } = useProductsFilterForm()
   const { categories, getAllCategories } = useCategoryStore()
   const [selectedCategory, setSelectedCategory] = useState('')
-  
+
   useEffect(() => {
     getAllCategories()
   }, [])

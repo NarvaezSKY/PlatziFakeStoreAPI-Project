@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import useModal from '../all/components/add/hooks/useModal';
-import UploadForm from '../all/components/add/add';
-import useProductDetails from './hooks/use-product-selected';
- // Importa la imagen alternativa
+import React, { useState } from 'react'
+import useModal from '../all/components/add/hooks/useModal'
+import UploadForm from '../all/components/add/add'
+import useProductDetails from './hooks/use-product-selected'
+// Importa la imagen alternativa
 
 const ProductDetails: React.FC = () => {
-  const { isOpen, openModal, closeModal } = useModal();
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
+  const { isOpen, openModal, closeModal } = useModal()
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0)
 
-  const { product, handleDeleteProduct } = useProductDetails();
+  const { product, handleDeleteProduct } = useProductDetails()
 
   const handleImageClick = (index: number) => {
-    setSelectedImageIndex(index);
-  };
+    setSelectedImageIndex(index)
+  }
 
   const handleEditProduct = () => {
-    openModal();
-  };
+    openModal()
+  }
 
   if (!product) {
     return (
@@ -27,7 +27,7 @@ const ProductDetails: React.FC = () => {
           <div className='w-4 h-4 rounded-full bg-primary animate-bounce [animation-delay:-.5s]'></div>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -36,7 +36,8 @@ const ProductDetails: React.FC = () => {
         <img
           src={product.images[selectedImageIndex]}
           onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-            e.currentTarget.src = 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'; // Establece la imagen alternativa en caso de error
+            e.currentTarget.src =
+              'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg' // Establece la imagen alternativa en caso de error
           }}
           className='w- mb-4 lg:mb-0 rounded-lg'
         />
@@ -46,7 +47,8 @@ const ProductDetails: React.FC = () => {
               key={index}
               src={image}
               onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                e.currentTarget.src = 'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'; // Establece la imagen alternativa en caso de error
+                e.currentTarget.src =
+                  'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg' // Establece la imagen alternativa en caso de error
               }}
               className={`w-16 h-16 cursor-pointer border ${
                 selectedImageIndex === index
@@ -90,7 +92,7 @@ const ProductDetails: React.FC = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ProductDetails;
+export default ProductDetails

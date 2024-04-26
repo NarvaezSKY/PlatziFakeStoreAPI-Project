@@ -65,7 +65,6 @@ const updateProduct: IProductsRepository['updateProduct'] = async (
     console.log(productData.category, 'PRODUCT DATA FROM REPOSITORY')
     console.log(res.data.category, 'RES DATA FROM REPOSITORY')
     return res.data
-    
   } catch (error) {
     throw new Error('Error updating product')
   }
