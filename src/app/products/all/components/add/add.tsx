@@ -35,7 +35,7 @@ const UploadForm: React.FC<UploadFormProps> = ({
       setValue('price', productToEdit.price)
       setValue('description', productToEdit.description)
       setValue('category.id', productToEdit.category.id)
-      setValue('images', productToEdit.images.join(','))
+      setValue('images', productToEdit.images[0])
       setValue('category.id', productToEdit.category.id)
     }
   }, [mode, productToEdit, setValue])
