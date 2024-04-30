@@ -6,23 +6,22 @@ import { ProductCard } from './components'
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import UploadForm from '../add/add'
+import { IGetAllProductsReq } from '../../../../../core/new-products/domain/get-all-products'
 
 export const List = () => {
   const { openModal, isOpen, closeModal } = useModal()
   const { products, loading, getAllProducts } = useProductStore()
   const [currentPage, setCurrentPage] = useState(1)
   const [searchParams, setSearchParams] = useSearchParams()
-
+  const params = new URLSearchParams(searchParams)
   useEffect(() => {
-    const params = new URLSearchParams(searchParams)
     const currentPageParam = params.get('offset')
-
     if (currentPageParam && !isNaN(parseInt(currentPageParam))) {
       setCurrentPage(Math.floor(parseInt(currentPageParam) / 10) + 1)
     } else {
       setCurrentPage(1)
     }
-  }, [])
+  }, [searchParams])
 
   const loadProducts = async () => {
     let offset = (currentPage - 1) * 10
@@ -31,14 +30,29 @@ export const List = () => {
       offset = 1
     }
 
-    const params = new URLSearchParams(searchParams)
-
     params.set('offset', offset.toString())
     params.set('limit', limit.toString())
 
     setSearchParams(params.toString())
 
-    getAllProducts({ offset, limit })
+    const body: IGetAllProductsReq = {
+      categoryId: searchParams.get('categoryId')
+        ? parseInt(searchParams.get('categoryId') || '0')
+        : undefined,
+      offset: offset,
+      limit: limit,
+      price_max: searchParams.get('price_max')
+        ? parseInt(searchParams.get('price_max') || '0')
+        : undefined,
+      price_min: searchParams.get('price_min')
+        ? parseInt(searchParams.get('price_min') || '0')
+        : undefined,
+      title: searchParams.get('title') || undefined
+    }
+
+    getAllProducts(body)
+
+    // getAllProducts({ offset, limit })
   }
 
   const handlePrevPage = () => {

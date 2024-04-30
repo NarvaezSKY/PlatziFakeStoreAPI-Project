@@ -8,11 +8,10 @@ import { useProductStore } from '../../../../store/use.products.store'
 
 export const useProductsFilterForm = () => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const params = new URLSearchParams(searchParams)
   const methods = useForm<IFormValues>({
     defaultValues: {
       categoryId: searchParams.get('categoryId') || '',
-      limit: searchParams.get('limit') || '',
-      offset: searchParams.get('offset') || '',
       price_max: searchParams.get('price_max') || '',
       price_min: searchParams.get('price_min') || '',
       title: searchParams.get('title') || ''
@@ -24,15 +23,15 @@ export const useProductsFilterForm = () => {
     methods.watch()
 
   const onChange = async () => {
-    const params = new URLSearchParams()
+    categoryId && params.set('categoryId', categoryId)
+    title && params.set('title', title)
+    price_max && params.set('price_max', price_max)
+    price_min && params.set('price_min', price_min)
 
-    categoryId && params.append('categoryId', categoryId)
-    offset && params.append('offset', offset)
-    limit && params.append('limit', limit)
-    title && params.append('title', title)
-
-    price_max && params.append('price_max', price_max)
-    price_min && params.append('price_min', price_min)
+    if (categoryId === '') params.delete('categoryId')
+    if (title === '') params.delete('title')
+    if (price_max === '') params.delete('price_max')
+    if (price_min === '') params.delete('price_min')
 
     setSearchParams(params.toString())
   }

@@ -31,14 +31,19 @@ const CategoryProductsPage: React.FC = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-center'>
         {categoryProducts &&
           categoryProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+            />
           ))}
       </div>
     </div>
   )
 }
 
-const ProductCard: React.FC<{ product: IGetProductsByCategoryRes }> = ({ product }) => {
+const ProductCard: React.FC<{ product: IGetProductsByCategoryRes }> = ({
+  product
+}) => {
   const [imageError, setImageError] = useState(false)
 
   const handleImageError = () => {
@@ -46,9 +51,7 @@ const ProductCard: React.FC<{ product: IGetProductsByCategoryRes }> = ({ product
   }
 
   return (
-    <div
-      className='w-70 h-80 bg-gray-50 p-3 flex flex-col gap-1 rounded-md'
-    >
+    <div className='w-70 h-80 bg-gray-50 p-3 flex flex-col gap-1 rounded-md'>
       <div className='h-48 bg-gray-200 rounded-md'>
         <img
           className='h-full w-full object-cover rounded-xl'

@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import useModal from '../all/components/add/hooks/useModal';
-import UploadForm from '../all/components/add/add';
-import useProductDetails from './hooks/use-product-selected';
+import React, { useState } from 'react'
+import useModal from '../all/components/add/hooks/useModal'
+import UploadForm from '../all/components/add/add'
+import useProductDetails from './hooks/use-product-selected'
 
 const ProductDetails: React.FC = () => {
-  const { isOpen, openModal, closeModal } = useModal();
-  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
-  const { product, handleDeleteProduct } = useProductDetails();
+  const { isOpen, openModal, closeModal } = useModal()
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0)
+  const { product, handleDeleteProduct } = useProductDetails()
 
   const handleImageClick = (index: number) => {
-    setSelectedImageIndex(index);
-  };
+    setSelectedImageIndex(index)
+  }
 
   const handleEditProduct = () => {
-    openModal();
-  };
+    openModal()
+  }
 
   if (!product) {
     return (
@@ -25,14 +25,18 @@ const ProductDetails: React.FC = () => {
           <div className='w-4 h-4 rounded-full bg-primary animate-bounce [animation-delay:-.5s]'></div>
         </div>
       </div>
-    );
+    )
   }
 
   // Ajuste de la estructura de la categoría
   const updatedProduct = {
     ...product,
-    category: { id: product.category.id, name: product.category.name, image: product.category.image },
-  };
+    category: {
+      id: product.category.id,
+      name: product.category.name,
+      image: product.category.image
+    }
+  }
 
   return (
     <div className='flex flex-col lg:flex-row lg:items-center'>
@@ -41,7 +45,7 @@ const ProductDetails: React.FC = () => {
           src={product.images[selectedImageIndex]}
           onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
             e.currentTarget.src =
-              'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg';
+              'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'
           }}
           className='w- mb-4 lg:mb-0 rounded-lg'
         />
@@ -52,7 +56,7 @@ const ProductDetails: React.FC = () => {
               src={image}
               onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                 e.currentTarget.src =
-                  'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg';
+                  'https://lightwidget.com/wp-content/uploads/localhost-file-not-found.jpg'
               }}
               className={`w-16 h-16 cursor-pointer border ${
                 selectedImageIndex === index
@@ -96,7 +100,7 @@ const ProductDetails: React.FC = () => {
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default ProductDetails;
+export default ProductDetails
