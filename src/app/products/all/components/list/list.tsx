@@ -52,7 +52,6 @@ export const List = () => {
 
     getAllProducts(body)
 
-    // getAllProducts({ offset, limit })
   }
 
   const handlePrevPage = () => {

@@ -7,12 +7,12 @@ export const CategoryCard = ({
 }: {
   category: IGetAllCategoriesRes
 }) => {
-  // Estado para controlar si la imagen principal falla al cargar
+  
   const [imageError, setImageError] = useState(false)
 
-  // Función para manejar el error de carga de la imagen
+  
   const handleImageError = () => {
-    setImageError(true) // Establece el estado de error de la imagen a true
+    setImageError(true) 
   }
 
   return (
@@ -23,7 +23,7 @@ export const CategoryCard = ({
       <div className='relative group cursor-pointer overflow-hidden duration-500 m-4 h-80 bg-secondary text-gray-50 p-5 rounded shadow'>
         <div className='w-full'>
           <div className='group-hover:scale-110 w-full h-60 duration-500'>
-            {/* Usamos un operador ternario para verificar si hubo un error en la carga de la imagen */}
+           
             <img
               className='h-full w-full object-cover rounded max-h-60'
               src={
@@ -32,7 +32,7 @@ export const CategoryCard = ({
                   : category.image
               }
               alt={category.name}
-              onError={handleImageError} // Maneja el error de carga de la imagen
+              onError={handleImageError} 
             />
           </div>
           <div className='absolute left-4 width-full p-5 -bottom-16 duration-500 group-hover:-translate-y-12'>

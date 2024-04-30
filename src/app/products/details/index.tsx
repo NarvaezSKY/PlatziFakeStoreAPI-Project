@@ -28,7 +28,6 @@ const ProductDetails: React.FC = () => {
     )
   }
 
-  // Ajuste de la estructura de la categoría
   const updatedProduct = {
     ...product,
     category: {

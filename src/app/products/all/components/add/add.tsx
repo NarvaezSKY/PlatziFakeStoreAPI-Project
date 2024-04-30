@@ -48,7 +48,7 @@ const UploadForm: React.FC<UploadFormProps> = ({
       const productData = {
         ...data,
         images,
-        categoryId: selectedCategory // Utiliza selectedCategory aquí
+        categoryId: selectedCategory
       }
       console.log(productData.category)
       if (mode === 'edit' && productToEdit) {
