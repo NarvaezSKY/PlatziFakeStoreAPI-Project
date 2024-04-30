@@ -2,7 +2,6 @@
 import useModal from '../add/hooks/useModal'
 import { useProductStore } from '../../../store/use.products.store'
 import { ProductCard } from './components'
-// import UploadForm from '../add/add'
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import UploadForm from '../add/add'
